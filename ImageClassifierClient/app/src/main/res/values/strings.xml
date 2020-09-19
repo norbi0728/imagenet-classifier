@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ImageClassifierClient</string>
+    <string name="main_button_capture">Capture</string>
+    <string name="main_button_classes">Available classes</string>
+    <string name="main_button_about">About</string>
+    <string name="main_button_exit">Exit</string>
+</resources>
