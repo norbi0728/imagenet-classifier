@@ -4,4 +4,30 @@
     <string name="main_button_classes">Available classes</string>
     <string name="main_button_about">About</string>
     <string name="main_button_exit">Exit</string>
+    <string name="result_label">Result</string>
+    <string name="result_button_back">Back</string>
+    <string name="result_button_capture">New capture</string>
+    <string name="result_button_feedback">Send feedback!</string>
+    <string name="disclaimer_button_send">Send</string>
+    <string name="disclaimer_button_back">Back</string>
+    <string name="disclaimer">This option will send me a feedback regarding the
+    classification including the captured image and rating to help me improve the service. If you don\'t want to send me this
+    information please touch the Back button.</string>
+    <string name="rest_uri">http://89.135.17.104:5000/</string>
+    <string name="wait_for_response">The classification of the image has been started! The result will be showing up in the top.
+Please be patient!</string>
+    <string name="feedback_sent">The feedback was sent successfully!
+Thank you!</string>
+    <string name="error_message">Something was went wrong. Please check you internet connection!</string>
+    <string name="ip">89.135.17.104</string>
+    <integer name="port">5000</integer>
+    <string name="title_activity_class_list">ClassListActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

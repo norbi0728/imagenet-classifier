@@ -2,6 +2,14 @@ from flask import Flask, jsonify, request
 import tensorflow as tf
 import numpy as np
 
+def file_reader(file_name):
+  for line in open(file_name, "r"):
+    yield line
+
+credentials_gen = file_reader("credentials.txt")
+email = next(credentials_gen).replace('\n', "")
+password = next(credentials_gen).replace('\n', "")
+
 model = tf.keras.applications.EfficientNetB7()
 
 input_height = model.input_shape[1]
@@ -27,6 +35,20 @@ def predict_image_class():
 																		#('n02089078', 'black-and-tan_coonhound', 0.0011360319),
 																		#('n02106550', 'Rottweiler', 0.0011076091)]]
 	label = label[0][0][1]
+	print(label)
 	return label
+
+@app.route("/credentials")
+def get_credentials():
+	return email + ';' + password
+
+@app.route("/classes")
+def get_classes():
+	to_send = ""
+	possible_predictions = tf.keras.applications.efficientnet.decode_predictions(np.arange(1000).reshape(1, 1000), top=1000) #shows the possible labels with additional data which I don't need
+	for item in possible_predictions[0]:
+	  to_send += ';' + item[1]
+	return to_send[1:]
+
 if __name__ == '__main__':
 	app.run(debug=False,host='0.0.0.0')
