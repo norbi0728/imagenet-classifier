@@ -29,7 +29,7 @@ public class EmailUtility {
 		this.email = username;
 		this.password = password;
 	}
-
+	//https://stackoverflow.com/questions/27032003/email-with-attachment-using-java-mail-api-in-android
 	public void send(File attachment, String prediction, String confidence, String rating)
 	{
 		String host = "smtp.gmail.com";
