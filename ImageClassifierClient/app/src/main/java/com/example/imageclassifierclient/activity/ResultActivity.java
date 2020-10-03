@@ -26,7 +26,6 @@ import com.example.imageclassifierclient.utility.PhotoUtility;
 import com.example.imageclassifierclient.utility.ServiceAvailabilityChecker;
 
 import java.io.File;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -42,7 +41,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private Button backBtn, newCaptureBtn, feedbackBtn, sendBtn, disclaimerBackBtn;
 
-    private TextView result;
+    private TextView result, confidencePercent;
     private PopupWindow popupWindow;
     private RatingBar ratingBar;
 
@@ -108,7 +107,7 @@ public class ResultActivity extends AppCompatActivity {
                         String email = splittedCredentials[0];
                         String password = splittedCredentials[1];
                         emailUtility = new EmailUtility(email, password);
-                        emailUtility.send(capturedImage, result.getText().toString(), String.valueOf(ratingBar.getRating()));
+                        emailUtility.send(capturedImage, result.getText().toString(), confidencePercent.getText().toString(), String.valueOf(ratingBar.getRating()));
                 }
         );
 
@@ -137,6 +136,7 @@ public class ResultActivity extends AppCompatActivity {
         feedbackBtn = findViewById(R.id.feedback);
         result = findViewById(R.id.result);
         ratingBar = findViewById(R.id.ratingBar);
+        confidencePercent = findViewById(R.id.confidencePercent);
     }
 
     public void initUtility() {
@@ -163,7 +163,7 @@ public class ResultActivity extends AppCompatActivity {
             feedbackBtn.setEnabled(true);
             capturedImage = photoUtility.getResultImage(requestCode, resultCode);
 
-            restService.getPrediction(result, capturedImage);
+            restService.getPrediction(result, confidencePercent, capturedImage);
             showToast(getString(R.string.wait_for_response));
         } else {
             feedbackBtn.setEnabled(false);

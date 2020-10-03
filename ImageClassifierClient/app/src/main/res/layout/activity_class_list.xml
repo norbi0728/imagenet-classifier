@@ -6,18 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".activity.ClassListActivity">
 
-    <ListView
-        android:id="@+id/classList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#55B5AC"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/classListBackBtn"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:text="@string/disclaimer_button_back" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/classTextViewContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#55B5AC"
+                android:orientation="vertical"
+                android:gravity="center_horizontal|center_vertical"/>
+        </ScrollView>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

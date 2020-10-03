@@ -30,7 +30,7 @@ public class EmailUtility {
 		this.password = password;
 	}
 
-	public void send(File attachment, String prediction, String rating)
+	public void send(File attachment, String prediction, String confidence, String rating)
 	{
 		String host = "smtp.gmail.com";
 
@@ -61,7 +61,7 @@ public class EmailUtility {
 			BodyPart messageBodyPart = new MimeBodyPart();
 
 			messageBodyPart.setText("A user has sent a feedback regarding the classification.\n\nThe received prediction: "
-					+ prediction + "\n"
+					+ prediction + ", with " + confidence + " certainty\n"
 					+ "The rating given by the user: "
 					+ rating + "\n"
 					+ "\nThe image in question can be found in the attachment.");

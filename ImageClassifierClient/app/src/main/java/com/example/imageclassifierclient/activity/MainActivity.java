@@ -28,20 +28,18 @@ public class MainActivity extends AppCompatActivity {
 	public void addListeners() {
 		captureBtn.setOnClickListener(
 				v -> {
-					Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-					startActivity(intent);
+					startActivity(ResultActivity.class);
 				}
 		);
 		classesBtn.setOnClickListener(
 				v -> {
-					Intent intent = new Intent(MainActivity.this, ClassListActivity.class);
-					startActivity(intent);
+					startActivity(ClassListActivity.class);
 				}
 		);
 
 		aboutBtn.setOnClickListener(
 				v -> {
-
+					startActivity(AboutActivity.class);
 				}
 		);
 
@@ -52,5 +50,10 @@ public class MainActivity extends AppCompatActivity {
 					System.exit(1);
 				}
 		);
+	}
+
+	public void startActivity(Class<? extends AppCompatActivity> activityClass) {
+		Intent intent = new Intent(MainActivity.this, activityClass);
+		startActivity(intent);
 	}
 }

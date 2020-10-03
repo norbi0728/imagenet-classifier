@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.imageclassifierclient.R;
 
 import java.io.File;
+import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -41,12 +42,7 @@ public class RestService extends Service {
 		}
 	}
 
-	public void getPrediction(final TextView textView, File imageToPredict) {
-		File dir = new File(getApplicationContext().getFilesDir(), "Temp");
-		if(!dir.exists()){
-			dir.mkdir();
-		}
-
+	public void getPrediction(final TextView resultTextView, final TextView confidencePercentTextView, File imageToPredict) {
 		RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), imageToPredict);
 
 		MultipartBody.Part part = MultipartBody.Part.createFormData("image", imageToPredict.getName(), fileReqBody);
@@ -64,7 +60,14 @@ public class RestService extends Service {
 									Toast.LENGTH_LONG).show();
 						} else {
 							String prediction = response.body();
-							textView.setText(prediction);
+
+							String[] splittedPrediction = prediction.split(";");
+							String classLabel = splittedPrediction[0];
+							String confidence = splittedPrediction[1];
+							String confidencePercentToShow = formatConfidence(confidence);
+
+							resultTextView.setText(classLabel);
+							confidencePercentTextView.setText(confidencePercentToShow);
 						}
 					}
 
@@ -75,6 +78,11 @@ public class RestService extends Service {
 								Toast.LENGTH_LONG).show();
 					}
 				});
+	}
+
+	public String formatConfidence(String confidence) {
+		int confidencePercent = (int) Math.round(Double.parseDouble(confidence) * 100);
+		return  String.valueOf(confidencePercent) + '%';
 	}
 
 	public void getCredentials(final String[] credentials)  {
@@ -99,22 +107,40 @@ public class RestService extends Service {
 
 	public void getClasses(final String[] classes)  {
 		Call<String> call = flaskServerApi.getClasses();
-		call.enqueue(
-				new Callback<String>() {
-					@Override
-					public void onResponse(Call<String> call, Response<String> response) {
-						if(!response.isSuccessful()) {
-							Toast.makeText(activity,
-									activity.getString(R.string.error_message) + response.code(),
-									Toast.LENGTH_LONG).show();
-						} else {
-							classes[0] = response.body();
-						}
-					}
+		Thread t = new Thread(() -> {
+			try {
+				Response<String> response = call.execute();
+				classes[0] = response.body();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-					@Override
-					public void onFailure(Call<String> call, Throwable t) {
-					}});
+
+//		call.enqueue(
+//				new Callback<String>() {
+//					@Override
+//					public void onResponse(Call<String> call, Response<String> response) {
+//						if(!response.isSuccessful()) {
+//							Toast.makeText(activity,
+//									activity.getString(R.string.error_message) + response.code(),
+//									Toast.LENGTH_LONG).show();
+//						} else {
+//							classes[0] = response.body();
+//						}
+//					}
+//
+//					@Override
+//					public void onFailure(Call<String> call, Throwable t) {
+//					}});
+
+
 	}
 
 	@Override

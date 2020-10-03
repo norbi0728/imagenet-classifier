@@ -28,15 +28,16 @@ def predict_image_class():
 	image = image.reshape(1, image.shape[0], image.shape[1], image.shape[2])
 	image = tf.keras.applications.efficientnet.preprocess_input(image)
 	pred = model.predict(image)
-	label = tf.keras.applications.efficientnet.decode_predictions(pred) #example label: 
+	pred = tf.keras.applications.efficientnet.decode_predictions(pred) #example label: 
 																		#[[('n02107142', 'Doberman', 0.8203237),
 																		#('n02107312', 'miniature_pinscher', 0.0028763188),
 																		#('n02109047', 'Great_Dane', 0.0012315626),
 																		#('n02089078', 'black-and-tan_coonhound', 0.0011360319),
 																		#('n02106550', 'Rottweiler', 0.0011076091)]]
-	label = label[0][0][1]
-	print(label)
-	return label
+	label = pred[0][0][1] # Dobermann in the above example
+	confidence = pred[0][0][2] # 0.8203237
+	print(label, confidence)
+	return label + ';' + str(confidence)
 
 @app.route("/credentials")
 def get_credentials():

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ImageClassifierClient</string>
+    <string name="app_name">ImageNet Classifier</string>
     <string name="main_button_capture">Capture</string>
     <string name="main_button_classes">Available classes</string>
     <string name="main_button_about">About</string>
@@ -8,9 +8,11 @@
     <string name="result_button_back">Back</string>
     <string name="result_button_capture">New capture</string>
     <string name="result_button_feedback">Send feedback!</string>
+    <string name="confidence">Confidence:</string>
+    <string name="confidence_percent">0%</string>
     <string name="disclaimer_button_send">Send</string>
     <string name="disclaimer_button_back">Back</string>
-    <string name="disclaimer">This option will send me a feedback regarding the
+    <string name="disclaimer">This option will send to the developer a feedback regarding the
     classification including the captured image and rating to help me improve the service. If you don\'t want to send me this
     information please touch the Back button.</string>
     <string name="rest_uri">http://89.135.17.104:5000/</string>
@@ -22,12 +24,15 @@ Thank you!</string>
     <string name="ip">89.135.17.104</string>
     <integer name="port">5000</integer>
     <string name="title_activity_class_list">ClassListActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="about">This app is built to satisfy the home-project requirement of Mobile Programming class in University of Pannonia.\n
+    It\'s able to differentiate 1000 classes from photos taken by the device\'s camera.\n
+    It does this through a remote service that runs a Convolutional Neural Network that was trained on enormous amount of image data
+    with advanced techniques. It follows that an internet connection is required and that the service is operational.\n
+    After the photo of the desired object was taken the application pass it on to the service and it makes it\'s prediction regarding the class that the image is belongs to.\n
+    Then the application shows the prediction in the top of the screen as well as it\'s confidence regarding the classification expressed in percentage.
+        If you willing to help improve the classification accuracy there\'s an option to
+    send a feedback to the developer. This function sends the photo taken, the class label, the confidence and the user\'s rating in a five scale.
+    The classes that the service is able to differentiate are available through touching the "Available classes" menu option in the main menu.
+    If there\'s no internet connection or the remote service is not operational the application shows error message. In this case please check your
+    connectivity or contact imageclassifierfeedback@gmail.com.</string>
 </resources>
