@@ -27,20 +27,14 @@ public class MainActivity extends AppCompatActivity {
 
 	public void addListeners() {
 		captureBtn.setOnClickListener(
-				v -> {
-					startActivity(ResultActivity.class);
-				}
+				v -> startActivity(ResultActivity.class)
 		);
 		classesBtn.setOnClickListener(
-				v -> {
-					startActivity(ClassListActivity.class);
-				}
+				v -> startActivity(ClassListActivity.class)
 		);
 
 		aboutBtn.setOnClickListener(
-				v -> {
-					startActivity(AboutActivity.class);
-				}
+				v -> startActivity(AboutActivity.class)
 		);
 
 		exitBtn.setOnClickListener(
